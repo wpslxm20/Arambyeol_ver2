@@ -1,4 +1,4 @@
-package com.aram.arambyeol_ver2.data.model
+package com.aram.arambyeol_ver2.core.domain.entity
 
 enum class DateEnum(val date:String) {
     TODAY("오늘"),

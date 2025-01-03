@@ -1,4 +1,4 @@
-package com.aram.arambyeol_ver2
+package com.aram.arambyeol_ver2.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,7 +8,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.aram.arambyeol_ver2.ui.theme.Arambyeol_ver2Theme
-import com.aram.arambyeol_ver2.view.MainView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

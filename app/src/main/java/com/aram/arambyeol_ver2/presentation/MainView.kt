@@ -1,4 +1,4 @@
-package com.aram.arambyeol_ver2.view
+package com.aram.arambyeol_ver2.presentation
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -11,11 +11,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,24 +26,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.clipRect
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.aram.arambyeol_ver2.MainActivity
 import com.aram.arambyeol_ver2.R
-import com.aram.arambyeol_ver2.data.model.DateEnum
+import com.aram.arambyeol_ver2.core.domain.entity.DateEnum
 import com.aram.arambyeol_ver2.ui.theme.Black3A3A3A
 import com.aram.arambyeol_ver2.ui.theme.Gray767676
 import com.aram.arambyeol_ver2.ui.theme.GrayA9A9A9
-import com.aram.arambyeol_ver2.viewmodel.MealPlanViewModel
 
 @Composable
 fun MainView(viewModel: MealPlanViewModel = hiltViewModel()) {

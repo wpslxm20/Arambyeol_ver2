@@ -1,10 +1,10 @@
-package com.aram.arambyeol_ver2.viewmodel
+package com.aram.arambyeol_ver2.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aram.arambyeol_ver2.data.model.MealPlan
-import com.aram.arambyeol_ver2.repository.MealPlanRepository
+import com.aram.arambyeol_ver2.core.data.dto.MealPlan
+import com.aram.arambyeol_ver2.core.domain.repository.MealPlanRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

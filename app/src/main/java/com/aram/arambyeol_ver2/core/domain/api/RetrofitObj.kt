@@ -1,4 +1,4 @@
-package com.aram.arambyeol_ver2.data.remote.api
+package com.aram.arambyeol_ver2.core.domain.api
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

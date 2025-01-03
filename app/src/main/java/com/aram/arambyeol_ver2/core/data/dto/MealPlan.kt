@@ -1,4 +1,4 @@
-package com.aram.arambyeol_ver2.data.model
+package com.aram.arambyeol_ver2.core.data.dto
 
 data class MealPlan(
     val today: DayPlan,
