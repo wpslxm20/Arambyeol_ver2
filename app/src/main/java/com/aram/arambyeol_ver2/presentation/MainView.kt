@@ -42,7 +42,7 @@ import com.aram.arambyeol_ver2.ui.theme.GrayA9A9A9
 
 @Composable
 fun MainView(viewModel: MealPlanViewModel = hiltViewModel()) {
-    viewModel.getMealPlanToNetwork()
+    viewModel.updateMealPlanToNetwork()
     val mealPlan = viewModel.mealPlan.observeAsState()
     val selectedDay = remember { mutableStateOf(DateEnum.TODAY) }
 
