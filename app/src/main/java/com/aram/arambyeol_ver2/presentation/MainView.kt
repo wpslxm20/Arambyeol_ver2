@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,10 +36,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.aram.arambyeol_ver2.R
+import com.aram.arambyeol_ver2.core.data.dto.Course
+import com.aram.arambyeol_ver2.core.data.dto.DayPlan
 import com.aram.arambyeol_ver2.core.domain.entity.DateEnum
+import com.aram.arambyeol_ver2.core.domain.entity.MealTimeEnum
 import com.aram.arambyeol_ver2.ui.theme.Black3A3A3A
 import com.aram.arambyeol_ver2.ui.theme.Gray767676
+import com.aram.arambyeol_ver2.ui.theme.Gray8A8A8A
 import com.aram.arambyeol_ver2.ui.theme.GrayA9A9A9
+import com.aram.arambyeol_ver2.ui.theme.GrayEFEFEF
 
 @Composable
 fun MainView(viewModel: MealPlanViewModel = hiltViewModel()) {
@@ -77,6 +83,17 @@ fun MainView(viewModel: MealPlanViewModel = hiltViewModel()) {
             ) {
                 TopView()
                 DateSelectView(selectedDay)
+            }
+        }
+        when (selectedDay.value) {
+            DateEnum.TODAY -> {
+                ShowDayPlan(viewModel.mealPlan.value?.today)
+            }
+            DateEnum.TOMORROW -> {
+                ShowDayPlan(viewModel.mealPlan.value?.tomorrow)
+            }
+            DateEnum.AFTER_TOMORROW -> {
+                ShowDayPlan(viewModel.mealPlan.value?.theDayAfterTomorrow)
             }
         }
     }
@@ -164,3 +181,103 @@ fun BtnDate(
         }
     }
 }
+
+@Composable
+fun ShowDayPlan(dayPlan: DayPlan?) {
+    if (dayPlan != null) {
+        for (mealTime in MealTimeEnum.values()) {
+            Column(
+                modifier = Modifier
+                    .padding(start = 24.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .padding(start = 2.dp, bottom = 14.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Image(
+                        painter = painterResource(mealTime.icon), contentDescription = null,
+                        modifier = Modifier
+                            .width(28.dp)
+                            .height(25.dp)
+                            .padding(end = 7.dp)
+                    )
+                    Text(
+                        text = mealTime.mealTime,
+                        modifier = Modifier
+                            .padding(3.dp),
+                        fontSize = 17.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Black3A3A3A
+                    )
+                    Text(
+                        text = "운영 시간 ${mealTime.operationTime}",
+                        fontSize = 12.sp,
+                        color = Gray8A8A8A
+                    )
+                }
+
+                val menuList = when (mealTime) {
+                    MealTimeEnum.MORNING -> dayPlan.morning
+                    MealTimeEnum.LUNCH -> dayPlan.lunch
+                    MealTimeEnum.DINNER -> dayPlan.dinner
+                }
+
+                ShowOneMealPlan(menuList)
+            }
+        }
+    } else {
+        // TODO : dayPlan이 null일 경우 예외 처리
+    }
+}
+
+@Composable
+fun ShowOneMealPlan(oneMealPlan: List<Course>) {
+    Row(
+        modifier = Modifier
+            .padding(bottom = 29.dp)
+    ) {
+        oneMealPlan.forEach { course ->
+            Box(
+                modifier = Modifier
+                    .width(200.dp)
+                    .height(150.dp)
+                    .background(GrayEFEFEF, shape = RoundedCornerShape(16.dp)),
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(15.dp)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .padding(bottom = 11.dp)
+                    ) {
+                        val courseName = course.course.split("/")
+                        Text(
+                            text = courseName[0],
+                            fontSize = 16.sp,
+                            color = Color.Black,
+                            modifier = Modifier.padding(end = 5.dp),
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        Text(
+                            text = courseName[1],
+                            fontSize = 16.sp,
+                            modifier = Modifier,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+
+                    if (course.menu != null) {
+                        Text(
+                            text = course.menu.joinToString(", "),
+                            fontSize = 14.sp,
+                            color = Color.Black
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
